@@ -1,0 +1,128 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#header{
+  display: flex;
+  font-size: 35px;
+  font-weight: 600;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+#handle{
+  display: flex;
+  gap: 108px;
+  font-size: 23px;
+}
+#handle div div{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 5px;
+}
+.circle-container {
+  display: block;
+  position: absolute;
+  top: 33%;
+  left: 26%;
+  background: linear-gradient(#662D8C, #ED1E79);;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: thin;
+  border: 3px solid #bfbfbf;
+  margin: 0em;
+}
+:nth-child(1) { --nth-child: 1 }
+:nth-child(2) { --nth-child: 2 }
+:nth-child(3) { --nth-child: 3 }
+:nth-child(4) { --nth-child: 4 }
+:nth-child(5) { --nth-child: 5}
+:nth-child(6) { --nth-child: 6 }
+:nth-child(7) { --nth-child: 7 }
+:nth-child(8) { --nth-child: 8 }
+:nth-child(9) { --nth-child: 9 }
+:nth-child(10) { --nth-child: 10 }
+:nth-child(11) { --nth-child: 11 }
+:nth-child(12) { --nth-child: 12 }
+
+
+.hour{
+    left:45%;
+    top:45%;
+    position:absolute;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:10%;
+    height:10%;
+    border-radius:100%;
+    font-size: 8px;
+    transform:rotateZ(calc((var(--nth-child) + 6)*calc(360/12)*1deg))
+            translateY(400%)
+            rotateZ(calc((var(--nth-child) + 6)*calc(360/12)*-1deg));
+            transform: rotate(calc(var(--nth-child) * 30deg)) translateY(400%) rotate(calc(var(--nth-child) * -30deg));
+}
+.radius {
+  position: absolute;
+  width: 33%;
+  height: 2px;
+  left: 50%;
+  top: 50%;
+  background: black;
+  transform-origin: left center;
+  transform: rotate(-35deg);
+}
+#display{
+  position: absolute;
+  width: 140px;
+  height: 50px;
+  background-color: silver;
+  top: 60%;
+  left: 29%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: x-large;
+}
+#reset-play{
+  position: absolute;
+  display: flex;
+  gap: 30px;
+  top: 50%;
+  left: 40%;
+}
+#me{
+  position: absolute;
+  top: 95%;
+left: 30%;
+color: silver;
+}
+.interactive-btn {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.interactive-btn:hover {
+  transform: scale(1.2);
+  color: #ed1e79;
+}
+@media only screen and (min-width: 720px) {
+  .circle-container {
+    left: 37%;
+  }
+  #me{
+    left: 42%;
+  }
+}
