@@ -10,6 +10,7 @@ function App() {
   const [isSession, setIsSession] = useState(true);
 
   const ref = useRef(null);
+  const audioRef = useRef(null); // Reference to the audio element
 
   const getDeadTime = (duration) => {
     let deadline = new Date();
@@ -57,15 +58,22 @@ function App() {
   const startSession = () => {
     clearTimer(getDeadTime(sessionLength));
     setIsSession(true);
+    audioRef.current?.play(); 
   };
 
   const startBreak = () => {
     clearTimer(getDeadTime(breakLength));
     setIsSession(false);
+    audioRef.current?.play(); 
   };
 
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      audioRef.current?.pause(); 
+    } else {
+      audioRef.current?.play(); 
+    }
   };
 
   const reset = () => {
@@ -75,16 +83,19 @@ function App() {
     setBreakLength(5);
     setSessionLength(25);
     setIsSession(true);
+    audioRef.current?.pause(); 
+    audioRef.current.currentTime = 0; 
   };
-
 
   useEffect(() => {
     if (isPlaying) {
       startSession();
     } else {
       if (ref.current) clearInterval(ref.current);
+      audioRef.current?.pause(); 
     }
   }, [isPlaying]);
+
   return (
     <>
       <div id="header">25 + 5 Clock</div>
@@ -92,44 +103,44 @@ function App() {
         <div id="break">
           <p>Break Length</p>
           <div id="break-handler">
-            <FaArrowUp onClick={() => setBreakLength((prev) => Math.min(prev + 1, 60))}/>
-          <p>{breakLength}</p>
-            <FaArrowDown onClick={() => setBreakLength((prev) => Math.max(prev - 1, 1))}/>
-        </div>
+            <FaArrowUp onClick={() => setBreakLength((prev) => Math.min(prev + 1, 60))} />
+            <p>{breakLength}</p>
+            <FaArrowDown onClick={() => setBreakLength((prev) => Math.max(prev - 1, 1))} />
+          </div>
         </div>
         <div id="session">
           <p>Session Length</p>
           <div id="break-handler">
-            <FaArrowUp onClick={() => setSessionLength((prev) => Math.min(prev + 1, 60))}/>
-          <p>{sessionLength}</p>
-            <FaArrowDown onClick={() => setSessionLength((prev) => Math.max(prev - 1, 1))}/>
+            <FaArrowUp onClick={() => setSessionLength((prev) => Math.min(prev + 1, 60))} />
+            <p>{sessionLength}</p>
+            <FaArrowDown onClick={() => setSessionLength((prev) => Math.max(prev - 1, 1))} />
           </div>
         </div>
       </div>
       <div className="circle-container">
-      <div className="hour">Achieve</div>
-      <div className="hour">Focus</div>
-      <div className="hour">Breathe</div>
-      <div className="hour">Go!</div>
-      <div className="hour">Push</div>
-      <div className="hour">Power</div>
-      <div className="hour">Focus</div>
-      <div className="hour">Believe</div>
-      <div className="hour">Persist</div>
-      <div className="hour">Grow</div>
-      <div className="hour">Relax</div>
-      <div className="hour">Finish</div>
+        <div className="hour">Achieve</div>
+        <div className="hour">Focus</div>
+        <div className="hour">Breathe</div>
+        <div className="hour">Go!</div>
+        <div className="hour">Push</div>
+        <div className="hour">Power</div>
+        <div className="hour">Focus</div>
+        <div className="hour">Believe</div>
+        <div className="hour">Persist</div>
+        <div className="hour">Grow</div>
+        <div className="hour">Relax</div>
+        <div className="hour">Finish</div>
         <div className="radius"></div>
         <div id="display">{timer}</div>
         <div id="reset-play">
-      <div onClick={togglePlayPause} className="interactive-btn">
-        {isPlaying ? <FaPause /> : <FaPlay />}
-      </div>
-      <FaRedoAlt onClick={reset} className="interactive-btn"/>
-      </div>
+          <div onClick={togglePlayPause} className="interactive-btn">
+            {isPlaying ? <FaPause /> : <FaPlay />}
+          </div>
+          <FaRedoAlt onClick={reset} className="interactive-btn" />
+        </div>
       </div>
       <p id="me">Designed and coded by Tinsae J.</p>
-      
+      <audio ref={audioRef} src="./public/audio/StockTune-Whispers Of Innovation_1734021235.mp3" preload="auto" />
     </>
   );
 }

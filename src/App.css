@@ -75,15 +75,25 @@ body{
             rotateZ(calc((var(--nth-child) + 6)*calc(360/12)*-1deg));
             transform: rotate(calc(var(--nth-child) * 30deg)) translateY(400%) rotate(calc(var(--nth-child) * -30deg));
 }
+
 .radius {
   position: absolute;
-  width: 33%;
-  height: 2px;
-  left: 50%;
-  top: 50%;
-  background: black;
-  transform-origin: left center;
-  transform: rotate(-35deg);
+  bottom: 50%;
+  right: 50%;
+  width: 2px;
+  height: 125px;
+  background-color: black;
+  transform-origin: center bottom; 
+  animation: rotate 25s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); 
+  }
+  to {
+    transform: rotate(360deg); 
+  }
 }
 #display{
   position: absolute;
